@@ -10,6 +10,8 @@ app.get('/', function (req, res) {
   res.render('index');
 });
 
-app.listen(3000, function () {
+const port = process.env.PORT || 3000
+
+app.listen(port, function () {
   console.log('Server running on port 3000!')
 });
