@@ -1,4 +1,9 @@
 {
+  "name": "background-filters",
+  "version": "1.0.0",
+  "engines": {
+    "node": "v8.10.0"
+  },
   "start": "node app.js"
 }
 {
