@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Tensorflow Background Filters</title>
+    <style>
+        #pageBody {
+            position: absolute;
+            top: 0; left: 0;
+            height: 100%; width: 100%;
+            background-color: gray;
+            background-position: center;
+            background-blend-mode: lighten;
+            background-size: 100%;
+            background-repeat: no-repeat;
+            filter:brightness(30%);
+            filter:opacity(30%);
+            z-index: -1;
+        }
+        #container {
+            display:flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            margin: 0px auto;
+            width: auto;
+            height: auto;
+            border: 10px #666 solid;
+        }
+        #videoElement {
+            width: 500px;
+            height: 375px;
+            background-color: white;
+            align-self: center;
+        }
+        #buttonElement {
+            display: block;
+            background-color: #B22222;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            padding: 8px 12px;
+            font-size: 16px;
+            margin-left:auto;
+            margin-right:auto;
+        }
+        #spinner {
+            display: none;
+        }
+        input[type="radio"] {
+            opacity: 0;
+            position: fixed;
+            width: 0;
+        }
+        .radioButtons label {
+            display: inline-block;
+            background-color: #ddd;
+            padding: 8px 12px;
+            font-family: sans-serif, Arial;
+            font-size: 12px;
+            border: 2px solid #444;
+            border-radius: 5px;
+        }
+        input[type="radio"]:checked + label {
+            background-color:#bfb;
+            border-color: #4CAF50;
+        }
+        #imageElement {
+            width: 500px;
+            height: 375px;
+            background-color: white;
+            align-self: center;
+        }
+        #styleForm {
+            display:flex;
+            flex-direction: row;
+            justify-content:space-evenly;
+        }
+        #filterQuestion {
+            padding-right: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        #radioQuestion {
+            padding-left: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .radioButtons {
+            display: flex;
+            flex-direction: row;
+        }
+        select[id="filter"] {
+            font-size: 12px;
+            border-radius: 5px;
+            padding: 8px 12px;
+        }
+    </style>
+    <script src="https://kit.fontawesome.com/98f6fc01f0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/body-pix@1.0.0"></script>
+</head>
+ 
+<body>
+<div id="pageBody"></div>
+<div id="container">
+    <div>
+        <video autoplay="true" id="videoElement"></video>
+        <img id="imageElement" crossorigin="anonymous" src="placeholder.jpg"></img>
+    </div>
+    <div>
+        <form id="styleForm">
+            <div id="filterQuestion">
+                <p>What filter to apply?</p>
+                <select id="filter" name="filter" onchange="setStyleImg();">
+                    <option value="bw">Black and White</option>
+                    <option value="sepia">Sepia</option>
+                    <option value="starryNight.jpg">Starry Night - Van Gogh</option>
+                    <option value="weep.jpg">The Weeping Woman - Picasso</option>
+                    <option value="waterLily.jpg">The Water Lily Pond - Monet</option>
+                    <option value="wave.jpg">The Wave off Kanagawa - Hokusai</option>
+                </select>
+            </div>
+            <div id="radioQuestion">
+                <p>Where to apply filter?</p>
+                <div class = "radioButtons">
+                    <input type="radio" checked="true" name="filterRadio" id="backgroundFilter"> 
+                    <label for="backgroundFilter">Background</label>
+                    <input type="radio" name="filterRadio" id="foregroundFilter"> 
+                    <label for="foregroundFilter">Foreground</label>
+                    <input type="radio" name="filterRadio" id="bothFilter">
+                    <label for="bothFilter">Both</label> 
+                </div>
+            </div>
+        </form><br>
+        <button type="button" id="buttonElement" onclick="snapPicture();">
+                <i id="spinner" class="fas fa-spinner fa-spin"></i>
+                <span id="buttonText">Take A Picture</span>
+                </button><br>
+    </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>
